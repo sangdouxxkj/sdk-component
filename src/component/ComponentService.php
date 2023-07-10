@@ -2,7 +2,9 @@
 
 namespace Sangdou\Component\component;
 
-class ComponentService
+use Sangdou\Component\core\AbstractAPI;
+
+class ComponentService extends AbstractAPI
 {
 
 }
