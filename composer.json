@@ -1,0 +1,35 @@
+{
+    "name": "sangdou/component",
+    "autoload": {
+        "psr-4": {
+            "Root\\App\\": "src/"
+        }
+    },
+    "description": "《桑豆技术团队》微信开放平台sdk for PHP",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "ComponentService",
+        "sangdou",
+        "微信开放平台sdk",
+        "sdk"
+    ],
+    "homepage": "https://github.com/sangdouxxkj/sdk-component",
+    "authors": [
+        {
+            "name": "sangdou technical team",
+            "email": "zhangxingyu1@mail.3-marks.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.1.0",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-libxml": "*",
+        "ext-simplexml": "*"
+    },
+    "extra": {
+        "class": "Sangdou\\Component\\component\\ComponentService"
+    }
+}
