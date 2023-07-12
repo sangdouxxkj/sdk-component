@@ -2,7 +2,7 @@
     "name": "sangdou/component",
     "autoload": {
         "psr-4": {
-            "Root\\App\\": "src/"
+            "Sangdou\\Component\\": "src/"
         }
     },
     "description": "《桑豆技术团队》微信开放平台sdk for PHP",
@@ -27,9 +27,10 @@
         "ext-curl": "*",
         "ext-json": "*",
         "ext-libxml": "*",
-        "ext-simplexml": "*"
+        "ext-simplexml": "*",
+        "pimple/pimple": "dev-main"
     },
     "extra": {
-        "class": "Sangdou\\Component\\component\\ComponentService"
+        "class": "Sangdou\\Component\\component\\src\\ComponentService"
     }
 }
