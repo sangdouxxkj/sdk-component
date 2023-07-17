@@ -2,7 +2,6 @@
 
 namespace Sangdou\Component\core;
 
-use Pimple\Container;
 use Sangdou\Component\core\provider\TicketProvider;
 
 abstract class AbstractAPI
@@ -13,8 +12,6 @@ abstract class AbstractAPI
      *
      */
     protected $accessToken;
-
-    protected $pimple;
 
     /**
      * @description provider map
@@ -27,9 +24,9 @@ abstract class AbstractAPI
     /**
      * Constructor.
      */
-    public function __construct()
+    public function __construct($config)
     {
-        $this->registerProviders(new Container::class);
+
     }
 
     public function setAccessToken($accessToken): self
@@ -39,12 +36,6 @@ abstract class AbstractAPI
         return $this;
     }
 
-    private function registerProviders(Container $pimple)
-    {
-        array_walk($this->providers, static function ($provider) use ($pimple) {
-            $pimple->register($provider);
-        });
-    }
 
     /**
      * @description curl请求

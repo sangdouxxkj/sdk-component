@@ -27,8 +27,7 @@
         "ext-curl": "*",
         "ext-json": "*",
         "ext-libxml": "*",
-        "ext-simplexml": "*",
-        "pimple/pimple": "v3.5.0"
+        "ext-simplexml": "*"
     },
     "extra": {
         "class": "Sangdou\\Component\\component\\src\\ComponentService"
