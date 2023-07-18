@@ -2,38 +2,27 @@
 
 namespace Sangdou\Component\core;
 
-use Sangdou\Component\core\provider\TicketProvider;
-
 abstract class AbstractAPI
 {
 
-    /**
-     * The request token.
-     *
-     */
-    protected $accessToken;
+    protected $componentAppid;
 
-    /**
-     * @description provider map
-     * @var string[]
-     */
-    protected $providers = [
-        TicketProvider::class
-    ];
+    protected $componentSecret;
+
+    protected $componentVerifyTicket;
+
+    protected $appid;
+
+    protected $authorizerRefreshToken;
+
+    /** @var $accessTokenHandle */
+    protected $accessTokenHandle;
 
     /**
      * Constructor.
      */
-    public function __construct($config)
+    public function __construct()
     {
-
-    }
-
-    public function setAccessToken($accessToken): self
-    {
-        $this->accessToken = $accessToken;
-
-        return $this;
     }
 
 
@@ -47,7 +36,7 @@ abstract class AbstractAPI
      * @param int $timeOut
      * @return array|false
      */
-    public function doRequest(string $url, array $data = [], bool $isPost = true, array $header = [], bool $isJson = true, int $timeOut = 0)
+    public function doRequest(string $url, array $params = [], bool $isPost = true, array $header = [], bool $isJson = true, int $timeOut = 0)
     {
         if (empty($url)) {
             return false;

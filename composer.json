@@ -5,6 +5,11 @@
             "Sangdou\\Component\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "tests\\": "tests/"
+        }
+    },
     "description": "《桑豆技术团队》微信开放平台sdk for PHP",
     "type": "library",
     "license": "MIT",
