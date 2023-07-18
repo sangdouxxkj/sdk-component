@@ -8,7 +8,7 @@ use Sangdou\Component\core\Constants;
 use Sangdou\Component\core\Singleton;
 use Sangdou\Component\core\TokenHandleTrait;
 
-class Service extends AbstractAPI
+class ComponentService extends AbstractAPI
 {
     use Singleton;
     use TokenHandleTrait;
@@ -25,13 +25,13 @@ class Service extends AbstractAPI
         array_key_exists('authorizer_refresh_token', $config) && $this->authorizerRefreshToken = $config['authorizer_refresh_token'];
     }
 
-    public function useComponentToken(): Service
+    public function useComponentToken(): ComponentService
     {
         $this->accessTokenType = Constants::ACCESS_TOKEN_COMPONENT;
         return $this;
     }
 
-    public function useAccessToken(): Service
+    public function useAccessToken(): ComponentService
     {
         $this->accessTokenType = Constants::ACCESS_TOKEN_ACCESS;
         return $this;
