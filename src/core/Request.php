@@ -56,7 +56,7 @@ class Request
 
                 // 执行请求
                 $response = curl_exec($ch);
-                $result = json_decode($response, true);
+                $result = json_decode($response);
                 $error = curl_error($ch);
                 if (!empty($error)) {
                     throw new \RuntimeException("curl发生错误:" . $error, ErrCode::EXCEPTION_CODE_CURL);
@@ -66,9 +66,9 @@ class Request
                     throw new \RuntimeException("返回的不是合法json字符串:" . $response,ErrCode::EXCEPTION_CODE_JSON);
                 }
 
-                if (!$this->isHideError && isset($result['errcode']) && $result['errcode'] != 0) {
-                    $errorCode = empty($result['errcode']) ? ErrCode::EXCEPTION_CODE_WECHAT : $result['errcode'];
-                    throw new \RuntimeException("访问微信接口发生错误:" . ($result['errmsg'] ?? ""), $errorCode);
+                if (!$this->isHideError && isset($result->errcode) && $result->errcode != 0) {
+                    $errorCode = empty($result->errcode) ? ErrCode::EXCEPTION_CODE_WECHAT : $result->errcode;
+                    throw new \RuntimeException("访问微信接口发生错误:" . ($result->errmsg ?? ""), $errorCode);
                 }
 
                 curl_close($ch);
@@ -159,7 +159,7 @@ class Request
             curl_setopt($ch, CURLOPT_SAFE_UPLOAD, true);
 
             $response = curl_exec($ch);
-            $result = json_decode($response, true);
+            $result = json_decode($response);
 
             $error = curl_error($ch);
             if (!empty($error)) {
@@ -170,8 +170,8 @@ class Request
                 throw new \RuntimeException("返回的不是合法json字符串:" . $response, ErrCode::EXCEPTION_CODE_JSON);
             }
 
-            if (isset($result['errcode']) && $result['errcode'] != 0) {
-                throw new \RuntimeException( "访问微信接口上传文件发生错误:" . ($result['errmsg'] ?? ""), ErrCode::EXCEPTION_CODE_WECHAT);
+            if (isset($result->errcode) && $result->errcode != 0) {
+                throw new \RuntimeException( "访问微信接口上传文件发生错误:" . ($result->errmsg ?? ""), ErrCode::EXCEPTION_CODE_WECHAT);
             }
 
             curl_close($ch);

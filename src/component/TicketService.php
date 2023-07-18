@@ -9,15 +9,15 @@ use Sangdou\Component\core\TokenHandleTrait;
 
 class TicketService extends AbstractAPI
 {
-    use TokenHandleTrait;
+    private $accessToken;
 
     public const API_START_PUSH_TICKET = 'https://api.weixin.qq.com/cgi-bin/component/api_start_push_ticket';
 
     public const API_CREATE_PREAUTHCODE = 'https://api.weixin.qq.com/cgi-bin/component/api_create_preauthcode?access_token=%s';
 
-    public function __construct(AccessToken $accessToken)
+    public function __construct($accessToken)
     {
-        $this->tokenHandle = $accessToken;
+        $this->accessToken = $accessToken;
     }
 
     /**
@@ -27,8 +27,8 @@ class TicketService extends AbstractAPI
     public function apiStartPushTicket()
     {
         $params = [
-            'component_appid' => $this->componentAppid,
-            'component_secret' => $this->componentSecret,
+            'component_appid' => $this->getComponentAppid(),
+            'component_secret' => $this->getComponentSecret(),
         ];
 
         return Request::getInstance()->send(self::API_START_PUSH_TICKET, $params);
@@ -37,8 +37,8 @@ class TicketService extends AbstractAPI
     public function apiCreatePreauthcode()
     {
         $params = [
-            'component_appid' => $this->componentAppid,
+            'component_appid' => $this->getComponentAppid(),
         ];
-        return Request::getInstance()->send(self::API_CREATE_PREAUTHCODE, $params);
+        return Request::getInstance()->send(sprintf(self::API_CREATE_PREAUTHCODE, $this->accessToken->component_access_token), $params);
     }
 }
