@@ -34,7 +34,7 @@ class Request
         $this->retryTimes = $times;
     }
 
-    public function send($url, array $data = [], $method = self::METHOD_POST, int $timeout = 2)
+    public function send($url, array $data = [], $method = self::METHOD_POST, int $timeout = 5)
     {
         if (in_array($url, self::NO_RETRY_URL_MAP)) {
             $this->retryTimes = 1;
@@ -51,7 +51,7 @@ class Request
                 $ch = $this->buildCurl($method, $url, $data, $timeout);
 
                 if ($ch === false) {
-                    throw new \RuntimeException(ErrCode::EXCEPTION_CODE_BUILD);
+                    throw new \RuntimeException('curl bulid 失败', ErrCode::EXCEPTION_CODE_BUILD);
                 }
 
                 // 执行请求
@@ -59,16 +59,16 @@ class Request
                 $result = json_decode($response, true);
                 $error = curl_error($ch);
                 if (!empty($error)) {
-                    throw new \RuntimeException(ErrCode::EXCEPTION_CODE_CURL, "curl发生错误:" . $error);
+                    throw new \RuntimeException("curl发生错误:" . $error, ErrCode::EXCEPTION_CODE_CURL);
                 }
 
                 if (!empty(json_last_error())) {
-                    throw new \RuntimeException(ErrCode::EXCEPTION_CODE_JSON, "返回的不是合法json字符串:" . $response);
+                    throw new \RuntimeException("返回的不是合法json字符串:" . $response,ErrCode::EXCEPTION_CODE_JSON);
                 }
 
                 if (!$this->isHideError && isset($result['errcode']) && $result['errcode'] != 0) {
                     $errorCode = empty($result['errcode']) ? ErrCode::EXCEPTION_CODE_WECHAT : $result['errcode'];
-                    throw new \RuntimeException($errorCode, "访问微信接口发生错误:" . ($result['errmsg'] ?? ""));
+                    throw new \RuntimeException("访问微信接口发生错误:" . ($result['errmsg'] ?? ""), $errorCode);
                 }
 
                 curl_close($ch);
@@ -76,8 +76,8 @@ class Request
             } catch (\Exception $e) {
                 if ($times >= $timesLimit) {
                     throw new \RuntimeException(
-                        $e->getCode(),
-                        "访问异常,进行第{$times}次重试:" . $e->getMessage()
+                        "访问异常,进行第{$times}次重试:" . $e->getMessage(),
+                        $e->getCode()
                     );
                 }
             }
@@ -163,15 +163,15 @@ class Request
 
             $error = curl_error($ch);
             if (!empty($error)) {
-                throw new \RuntimeException(ErrCode::EXCEPTION_CODE_CURL, "curl发生错误:" . $error);
+                throw new \RuntimeException("curl发生错误:" . $error, ErrCode::EXCEPTION_CODE_CURL);
             }
 
             if (!empty(json_last_error())) {
-                throw new \RuntimeException(ErrCode::EXCEPTION_CODE_JSON, "返回的不是合法json字符串:" . $response);
+                throw new \RuntimeException("返回的不是合法json字符串:" . $response, ErrCode::EXCEPTION_CODE_JSON);
             }
 
             if (isset($result['errcode']) && $result['errcode'] != 0) {
-                throw new \RuntimeException(ErrCode::EXCEPTION_CODE_WECHAT, "访问微信接口上传文件发生错误:" . ($result['errmsg'] ?? ""));
+                throw new \RuntimeException( "访问微信接口上传文件发生错误:" . ($result['errmsg'] ?? ""), ErrCode::EXCEPTION_CODE_WECHAT);
             }
 
             curl_close($ch);
