@@ -17,6 +17,11 @@ class TokenService extends AbstractAPI
 
     public const API_AUTHORIZER_TOKEN = 'https://api.weixin.qq.com/cgi-bin/component/api_authorizer_token?component_access_token=%s';
 
+    public function __construct($options)
+    {
+        parent::__construct($options);
+    }
+
     public function getComponentToken()
     {
         return Request::getInstance()->send(self::API_COMPONENT_TOKEN, [

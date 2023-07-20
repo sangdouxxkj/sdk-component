@@ -4,34 +4,57 @@ namespace Sangdou\Component\core;
 
 abstract class AbstractAPI
 {
+    protected $options;
 
-    protected static $componentAppid;
+    protected $componentAppid;
 
-    protected static $componentSecret;
+    protected $componentSecret;
 
-    protected static $componentVerifyTicket;
+    protected $componentVerifyTicket;
 
-    protected static $authorizerAppid;
+    protected $authorizerAppid;
 
-    protected static $authorizerRefreshToken;
+    protected $authorizerRefreshToken;
 
     /** @var $accessTokenHandle */
     protected $accessTokenHandle;
+
+    public function __construct($options)
+    {
+        foreach ($options as $option => $value) {
+            (method_exists(self::class, $this->convertToCamelCase($option)) && empty($this->{$this->convertToCamelCase($option, 'get')}())) && $this->{$this->convertToCamelCase($option)}($value);
+        }
+    }
+
+    private function convertToCamelCase($inputString, $pre = 'set'): string
+    {
+        $words = explode('_', $inputString);
+        $camelCaseWords = array_map('ucfirst', $words);
+        return $pre . implode('', $camelCaseWords);
+    }
 
     /**
      * @return mixed
      */
     public function getComponentAppid()
     {
-        return self::$componentAppid;
+        return $this->componentAppid;
+    }
+
+    /**
+     * @param mixed $componentAppid
+     */
+    public function setComponentAppid($componentAppid): void
+    {
+        $this->componentAppid = $componentAppid;
     }
 
     /**
      * @return mixed
      */
-    public function getComponentSecret()
+    public function getComponentsecret()
     {
-        return self::$componentSecret;
+        return $this->componentSecret;
     }
 
     /**
@@ -39,7 +62,7 @@ abstract class AbstractAPI
      */
     public function getComponentVerifyTicket()
     {
-        return self::$componentVerifyTicket;
+        return $this->componentVerifyTicket;
     }
 
     /**
@@ -47,7 +70,7 @@ abstract class AbstractAPI
      */
     public function getAuthorizerAppid()
     {
-        return self::$authorizerAppid;
+        return $this->authorizerAppid;
     }
 
     /**
@@ -55,6 +78,38 @@ abstract class AbstractAPI
      */
     public function getAuthorizerRefreshToken()
     {
-        return self::$authorizerRefreshToken;
+        return $this->authorizerRefreshToken;
+    }
+
+    /**
+     * @param mixed $componentSecret
+     */
+    private function setComponentappsecret($componentSecret): void
+    {
+        $this->componentSecret = $componentSecret;
+    }
+
+    /**
+     * @param mixed $componentVerifyTicket
+     */
+    private function setComponentVerifyTicket($componentVerifyTicket): void
+    {
+        $this->componentVerifyTicket = $componentVerifyTicket;
+    }
+
+    /**
+     * @param mixed $authorizerAppid
+     */
+    private function setAuthorizerAppid($authorizerAppid): void
+    {
+        $this->authorizerAppid = $authorizerAppid;
+    }
+
+    /**
+     * @param mixed $authorizerRefreshToken
+     */
+    private function setAuthorizerRefreshToken($authorizerRefreshToken): void
+    {
+        $this->authorizerRefreshToken = $authorizerRefreshToken;
     }
 }

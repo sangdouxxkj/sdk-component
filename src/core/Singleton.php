@@ -20,4 +20,9 @@ trait Singleton
         }
         return self::$instance;
     }
+
+    static function newInstance(...$args)
+    {
+        return new static(...$args);
+    }
 }

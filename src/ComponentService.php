@@ -17,66 +17,23 @@ class ComponentService extends AbstractAPI
     /** @var $accessTokenType */
     protected $accessTokenType;
 
-    public function __construct(array $config)
+    public function __construct(array $options)
     {
-        array_key_exists('component_appid', $config) && $this->setComponentAppid($config['component_appid']);
-        array_key_exists('authorizer_appid', $config) && $this->setAuthorizerAppid($config['authorizer_appid']);
-        array_key_exists('component_appsecret', $config) && $this->setComponentSecret($config['component_appsecret']);
-        array_key_exists('component_verify_ticket', $config) && $this->setComponentVerifyTicket($config['component_verify_ticket']);
-        array_key_exists('authorizer_refresh_token', $config) && $this->setAuthorizerRefreshToken($config['authorizer_refresh_token']);
-    }
-
-    /**
-     * @param mixed $componentAppid
-     */
-    private function setComponentAppid($componentAppid): void
-    {
-        self::$componentAppid = $componentAppid;
-    }
-
-    /**
-     * @param mixed $componentSecret
-     */
-    private function setComponentSecret($componentSecret): void
-    {
-        self::$componentSecret = $componentSecret;
-    }
-
-    /**
-     * @param mixed $componentVerifyTicket
-     */
-    private function setComponentVerifyTicket($componentVerifyTicket): void
-    {
-        self::$componentVerifyTicket = $componentVerifyTicket;
-    }
-
-    /**
-     * @param mixed $authorizerAppid
-     */
-    private function setAuthorizerAppid($authorizerAppid): void
-    {
-        self::$authorizerAppid = $authorizerAppid;
-    }
-
-    /**
-     * @param mixed $authorizerRefreshToken
-     */
-    private function setAuthorizerRefreshToken($authorizerRefreshToken): void
-    {
-        self::$authorizerRefreshToken = $authorizerRefreshToken;
+        parent::__construct($options);
+        $this->options = $options;
     }
 
     public function useComponentToken(): ComponentService
     {
         $this->accessTokenType = Constants::ACCESS_TOKEN_COMPONENT;
-        $this->accessTokenHandle = TokenService::getInstance();
+        $this->accessTokenHandle = new TokenService($this->options);
         return $this;
     }
 
     public function useAccessToken(): ComponentService
     {
         $this->accessTokenType = Constants::ACCESS_TOKEN_ACCESS;
-        $this->accessTokenHandle = TokenService::getInstance();
+        $this->accessTokenHandle = new TokenService($this->options);
         return $this;
     }
 
@@ -85,7 +42,6 @@ class ComponentService extends AbstractAPI
         if (empty($this->getComponentAppid()) && empty($this->getAuthorizerAppid())) {
             throw new \RuntimeException('请求异常1');
         }
-
         switch ($this->accessTokenType) {
             case Constants::ACCESS_TOKEN_ACCESS:
                 return TokenService::getInstance()->getComponentToken();
