@@ -26,7 +26,7 @@ class ComponentService extends AbstractAPI
     public function useComponentToken(): ComponentService
     {
         $this->accessTokenType = Constants::ACCESS_TOKEN_COMPONENT;
-        $this->currentAccessToken(Constants::ACCESS_TOKEN_COMPONENT);
+        $this->currentAccessToken();
         return $this;
     }
 
