@@ -4,9 +4,9 @@ namespace Sangdou\Component\core;
 
 trait TokenHandleTrait
 {
-    private $tokenHandle;
+    public $tokenHandle;
 
-    private function getComponentTokenHandle()
+    public function getComponentTokenHandle()
     {
         if (empty($this->tokenHandle)) {
             throw new \RuntimeException(ErrCode::CODE_COMPONENT_TOKEN_ERR);

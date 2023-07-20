@@ -3,13 +3,14 @@
 namespace Sangdou\Component\component;
 
 use Sangdou\Component\core\AbstractAPI;
+use Sangdou\Component\core\AccessToken;
 use Sangdou\Component\core\Request;
 use Sangdou\Component\core\Singleton;
 
 /**
  * @method string component_access_token
  */
-class TokenService extends AbstractAPI
+class TokenService extends AbstractAPI implements AccessToken
 {
     use Singleton;
 
@@ -26,8 +27,13 @@ class TokenService extends AbstractAPI
     {
         return Request::getInstance()->send(self::API_COMPONENT_TOKEN, [
             'component_appid' => $this->getComponentAppid(),
-            'component_appsecret' => $this->getComponentSecret(),
+            'component_appsecret' => $this->getComponentAppsecret(),
             'component_verify_ticket' => $this->getComponentVerifyTicket(),
         ]);
+    }
+
+    public function getAccessToken()
+    {
+        // TODO: Implement getAccessToken() method.
     }
 }

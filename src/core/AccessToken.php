@@ -4,7 +4,7 @@ namespace Sangdou\Component\core;
 
 interface AccessToken
 {
-    public function getComponentTokenHandle();
+    public function getComponentToken();
 
     public function getAccessToken();
 }

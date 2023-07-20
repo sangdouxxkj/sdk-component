@@ -26,14 +26,13 @@ class ComponentService extends AbstractAPI
     public function useComponentToken(): ComponentService
     {
         $this->accessTokenType = Constants::ACCESS_TOKEN_COMPONENT;
-        $this->accessTokenHandle = new TokenService($this->options);
+        $this->currentAccessToken(Constants::ACCESS_TOKEN_COMPONENT);
         return $this;
     }
 
     public function useAccessToken(): ComponentService
     {
         $this->accessTokenType = Constants::ACCESS_TOKEN_ACCESS;
-        $this->accessTokenHandle = new TokenService($this->options);
         return $this;
     }
 
@@ -42,11 +41,14 @@ class ComponentService extends AbstractAPI
         if (empty($this->getComponentAppid()) && empty($this->getAuthorizerAppid())) {
             throw new \RuntimeException('请求异常1');
         }
+        $this->tokenHandle = new TokenService($this->options);
         switch ($this->accessTokenType) {
             case Constants::ACCESS_TOKEN_ACCESS:
-                return TokenService::getInstance()->getComponentToken();
+                $this->accessTokenHandle =  TokenService::getInstance()->getComponentToken();
+                break;
             case Constants::ACCESS_TOKEN_COMPONENT:
-                return $this->accessTokenHandle->getComponentToken();
+                $this->accessTokenHandle = $this->tokenHandle->getComponentToken();
+                break;
             default:
                 throw new \RuntimeException('请求异常2');
         }
@@ -58,6 +60,6 @@ class ComponentService extends AbstractAPI
      */
     public function ticket(): TicketService
     {
-        return new TicketService($this->currentAccessToken());
+        return new TicketService($this->options, $this);
     }
 }
