@@ -4,7 +4,6 @@ namespace Sangdou\Component\component;
 
 use Sangdou\Component\ComponentService;
 use Sangdou\Component\core\AbstractAPI;
-use Sangdou\Component\core\AccessToken;
 use Sangdou\Component\core\Request;
 
 class TicketService extends AbstractAPI
@@ -33,6 +32,10 @@ class TicketService extends AbstractAPI
         return Request::getInstance()->send(self::API_START_PUSH_TICKET, $params);
     }
 
+    /**
+     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/ticket-token/getPreAuthCode.html
+     * @return mixed|void
+     */
     public function apiCreatePreauthcode()
     {
         $params = [
