@@ -14,6 +14,8 @@ class TicketService extends AbstractAPI
 
     public const API_QUERY_AUTH = 'https://api.weixin.qq.com/cgi-bin/component/api_query_auth?component_access_token=%s';
 
+    public const QUOTA_GET = 'https://api.weixin.qq.com/cgi-bin/openapi/quota/get?access_token=%s';
+
     public function __construct(array $options, ComponentService $service)
     {
         parent::__construct($options);
@@ -59,5 +61,32 @@ class TicketService extends AbstractAPI
         ];
 
         return Request::getInstance()->send(sprintf(self::API_QUERY_AUTH, $this->service->tokenHandle->getComponentToken()->component_access_token), $params);
+    }
+
+    /**
+     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/openapi/getApiQuota.html
+     * @param $cgi_path
+     * @param $type 1 第三方平台;2 小程序; 3 公众号
+     * @return mixed|void
+     * @throws \Exception
+     */
+    public function quotaGet($cgi_path, $type = 1)
+    {
+        $params = [
+            'cgi_path' => $cgi_path,
+        ];
+
+        switch ($type) {
+            case 1:
+                $accessToken = $this->service->tokenHandle->getComponentToken()->component_access_token;
+                break;
+            case 2:
+                $accessToken = $this->service->tokenHandle->getAccessTokenHandle()->authorizer_access_token;
+                break;
+            default :
+                throw new \Exception('确实token');
+        }
+
+        return Request::getInstance()->send(sprintf(self::API_QUERY_AUTH, $accessToken), $params);
     }
 }

@@ -19,7 +19,7 @@ trait TokenHandleTrait
         return $componentToken;
     }
 
-    public function getAccessToken()
+    public function getAccessTokenHandle()
     {
         if (empty($this->tokenHandle)) {
             throw new \RuntimeException(ErrCode::CODE_ACCESS_TOKEN_ERR);

@@ -9,6 +9,7 @@ use Sangdou\Component\core\Singleton;
 
 /**
  * @method string component_access_token
+ * @method string authorizer_access_token
  */
 class TokenService extends AbstractAPI implements AccessToken
 {
@@ -24,6 +25,7 @@ class TokenService extends AbstractAPI implements AccessToken
     }
 
     /**
+     * @see https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/ThirdParty/token/component_access_token.html
      * @description 三方平台token
      * @return mixed|void
      */
@@ -37,6 +39,7 @@ class TokenService extends AbstractAPI implements AccessToken
     }
 
     /**
+     * @see https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/ThirdParty/token/api_authorizer_token.html
      * @description 获取/刷新接口调用令牌
      * @return mixed|void
      */

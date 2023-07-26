@@ -6,6 +6,7 @@ use Sangdou\Component\component\AuthorizerService;
 use Sangdou\Component\component\TemplateService;
 use Sangdou\Component\component\TicketService;
 use Sangdou\Component\component\TokenService;
+use Sangdou\Component\component\WxaService;
 use Sangdou\Component\core\AbstractAPI;
 use Sangdou\Component\core\Constants;
 use Sangdou\Component\core\Singleton;
@@ -47,7 +48,7 @@ class ComponentService extends AbstractAPI
         $this->tokenHandle = new TokenService($this->options);
         switch ($this->accessTokenType) {
             case Constants::ACCESS_TOKEN_ACCESS:
-                $this->accessTokenHandle =  $this->tokenHandle->getAccessToken();
+                $this->accessTokenHandle = $this->tokenHandle->getAccessToken();
                 break;
             case Constants::ACCESS_TOKEN_COMPONENT:
                 $this->accessTokenHandle = $this->tokenHandle->getComponentToken();
@@ -73,6 +74,15 @@ class ComponentService extends AbstractAPI
     public function authorizer(): AuthorizerService
     {
         return new AuthorizerService($this->options, $this);
+    }
+
+    /**
+     * @description 小程序代调用接口
+     * @return WxaService
+     */
+    public function wxa(): WxaService
+    {
+        return new WxaService($this->options, $this);
     }
 
     /**

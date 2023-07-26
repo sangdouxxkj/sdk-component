@@ -16,6 +16,10 @@ class TemplateService extends AbstractAPI
 
     public const DELETE_TEMPLATE = 'https://api.weixin.qq.com/wxa/deletetemplate?access_token=%s';
 
+    public const WXA_COMMIT = 'https://api.weixin.qq.com/wxa/commit?access_token=%s';
+
+    public const GET_QRCODE = 'https://api.weixin.qq.com/wxa/get_qrcode?access_token=%s';
+
     public function __construct(array $options, ComponentService $service)
     {
         parent::__construct($options);
@@ -69,5 +73,42 @@ class TemplateService extends AbstractAPI
         ];
 
         return Request::getInstance()->send(sprintf(self::DELETE_TEMPLATE, $this->service->getComponentTokenHandle()->component_access_token), $params);
+    }
+
+    /**
+     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/code-management/commit.html
+     * @param $template_id
+     * @param $ext_json
+     * @param $user_version
+     * @param $user_desc
+     * @return mixed|void
+     */
+    public function wxaCommit($template_id, $ext_json, $user_version, $user_desc)
+    {
+        $params = [
+            'template_id' => $template_id,
+            'ext_json' => $ext_json,
+            'user_version' => $user_version,
+            'user_desc' => $user_desc,
+        ];
+
+        return Request::getInstance()->send(sprintf(self::WXA_COMMIT, $this->service->getAccessTokenHandle()->authorizer_access_token), $params);
+    }
+
+    /**
+     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/code-management/getTrialQRCode.html
+     * @param string $path
+     * @return mixed|void
+     */
+    public function getQrcode(string $path = '')
+    {
+        $params = [];
+        if (!empty($path)) {
+            $params = [
+                'path' => $path
+            ];
+        }
+
+        return Request::getInstance()->send(sprintf(self::GET_QRCODE, $this->service->getAccessTokenHandle()->authorizer_access_token), $params, Request::METHOD_GET);
     }
 }
