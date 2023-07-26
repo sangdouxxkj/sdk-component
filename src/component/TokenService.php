@@ -23,6 +23,10 @@ class TokenService extends AbstractAPI implements AccessToken
         parent::__construct($options);
     }
 
+    /**
+     * @description 三方平台token
+     * @return mixed|void
+     */
     public function getComponentToken()
     {
         return Request::getInstance()->send(self::API_COMPONENT_TOKEN, [
@@ -32,8 +36,16 @@ class TokenService extends AbstractAPI implements AccessToken
         ]);
     }
 
+    /**
+     * @description 获取/刷新接口调用令牌
+     * @return mixed|void
+     */
     public function getAccessToken()
     {
-        // TODO: Implement getAccessToken() method.
+        return Request::getInstance()->send(self::API_AUTHORIZER_TOKEN, [
+            'component_appid' => $this->getComponentAppid(),
+            'authorizer_appid' => $this->getAuthorizerAppid(),
+            'authorizer_refresh_token' => $this->getAuthorizerRefreshToken(),
+        ]);
     }
 }

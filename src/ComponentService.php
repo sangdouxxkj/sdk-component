@@ -2,6 +2,7 @@
 
 namespace Sangdou\Component;
 
+use Sangdou\Component\component\AuthorizerService;
 use Sangdou\Component\component\TemplateService;
 use Sangdou\Component\component\TicketService;
 use Sangdou\Component\component\TokenService;
@@ -45,7 +46,7 @@ class ComponentService extends AbstractAPI
         $this->tokenHandle = new TokenService($this->options);
         switch ($this->accessTokenType) {
             case Constants::ACCESS_TOKEN_ACCESS:
-                $this->accessTokenHandle =  TokenService::getInstance()->getComponentToken();
+                $this->accessTokenHandle =  $this->tokenHandle->getAccessToken();
                 break;
             case Constants::ACCESS_TOKEN_COMPONENT:
                 $this->accessTokenHandle = $this->tokenHandle->getComponentToken();
@@ -62,6 +63,15 @@ class ComponentService extends AbstractAPI
     public function ticket(): TicketService
     {
         return new TicketService($this->options, $this);
+    }
+
+    /**
+     * @description 授权账号管理
+     * @return AuthorizerService
+     */
+    public function authorizer(): AuthorizerService
+    {
+        return new AuthorizerService($this->options, $this);
     }
 
     /**

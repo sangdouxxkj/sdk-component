@@ -44,7 +44,7 @@ class TemplateService extends AbstractAPI
             'template_type' => $template_type,
         ];
 
-        return Request::getInstance()->send(self::ADD_TO_TEMPLATE, $params);
+        return Request::getInstance()->send(sprintf(self::ADD_TO_TEMPLATE, $this->service->getComponentTokenHandle()->component_access_token), $params);
     }
 
     /**
@@ -68,6 +68,6 @@ class TemplateService extends AbstractAPI
             'template_id' => $template_id,
         ];
 
-        return Request::getInstance()->send(self::DELETE_TEMPLATE, $params);
+        return Request::getInstance()->send(sprintf(self::DELETE_TEMPLATE, $this->service->getComponentTokenHandle()->component_access_token), $params);
     }
 }

@@ -12,6 +12,8 @@ class TicketService extends AbstractAPI
 
     public const API_CREATE_PREAUTHCODE = 'https://api.weixin.qq.com/cgi-bin/component/api_create_preauthcode?access_token=%s';
 
+    public const API_QUERY_AUTH = 'https://api.weixin.qq.com/cgi-bin/component/api_query_auth?component_access_token=%s';
+
     public function __construct(array $options, ComponentService $service)
     {
         parent::__construct($options);
@@ -41,6 +43,21 @@ class TicketService extends AbstractAPI
         $params = [
             'component_appid' => $this->service->getComponentAppid(),
         ];
-        return Request::getInstance()->send(sprintf(self::API_CREATE_PREAUTHCODE,$this->service->tokenHandle->getComponentToken()->component_access_token), $params);
+        return Request::getInstance()->send(sprintf(self::API_CREATE_PREAUTHCODE, $this->service->tokenHandle->getComponentToken()->component_access_token), $params);
+    }
+
+    /**
+     * @see https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/ThirdParty/token/authorization_info.html
+     * @param $authorization_code
+     * @return mixed|void
+     */
+    public function apiQueryAuth($authorization_code)
+    {
+        $params = [
+            'component_appid' => $this->service->getComponentAppid(),
+            'authorization_code' => $authorization_code,
+        ];
+
+        return Request::getInstance()->send(sprintf(self::API_QUERY_AUTH, $this->service->tokenHandle->getComponentToken()->component_access_token), $params);
     }
 }
