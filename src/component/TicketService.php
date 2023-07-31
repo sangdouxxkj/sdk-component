@@ -84,9 +84,9 @@ class TicketService extends AbstractAPI
                 $accessToken = $this->service->tokenHandle->getAccessTokenHandle()->authorizer_access_token;
                 break;
             default :
-                throw new \Exception('确实token');
+                throw new \Exception('缺失token');
         }
 
-        return Request::getInstance()->send(sprintf(self::API_QUERY_AUTH, $accessToken), $params);
+        return Request::getInstance()->send(sprintf(self::QUOTA_GET, $accessToken), $params);
     }
 }

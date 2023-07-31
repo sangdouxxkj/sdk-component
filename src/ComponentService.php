@@ -3,6 +3,7 @@
 namespace Sangdou\Component;
 
 use Sangdou\Component\component\AuthorizerService;
+use Sangdou\Component\component\CategoryService;
 use Sangdou\Component\component\TemplateService;
 use Sangdou\Component\component\TicketService;
 use Sangdou\Component\component\TokenService;
@@ -92,5 +93,14 @@ class ComponentService extends AbstractAPI
     public function template(): TemplateService
     {
         return new TemplateService($this->options, $this);
+    }
+
+    /**
+     * @description 小程序类目管理
+     * @return CategoryService
+     */
+    public function category(): CategoryService
+    {
+        return new CategoryService($this->options, $this);
     }
 }
