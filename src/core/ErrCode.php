@@ -26,4 +26,23 @@ class ErrCode
 
     // 请求成功
     const CODE_SUCCESS = 0;
+
+    const TEMPLATE_NOT_FOUND = 85064;
+
+    const TEMPLATE_LIST_IS_FULL = 85065;
+
+    public static function errMsg($errCode)
+    {
+        if ($errCode == self::CODE_SUCCESS) {
+            return '';
+        }
+        switch ($errCode) {
+            case self::TEMPLATE_NOT_FOUND:
+                return '找不到模板';
+            case self::TEMPLATE_LIST_IS_FULL:
+                return '模板库已满';
+            default:
+                return '系统繁忙，此时请开发者稍候再试';
+        }
+    }
 }
