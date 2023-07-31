@@ -20,6 +20,8 @@ class TemplateService extends AbstractAPI
 
     public const GET_QRCODE = 'https://api.weixin.qq.com/wxa/get_qrcode?access_token=%s';
 
+    public const WXA_RELEASE = 'https://api.weixin.qq.com/wxa/release?access_token=%s';
+
     public function __construct(array $options, ComponentService $service)
     {
         parent::__construct($options);
@@ -110,5 +112,14 @@ class TemplateService extends AbstractAPI
         }
 
         return Request::getInstance()->send(sprintf(self::GET_QRCODE, $this->service->getAccessTokenHandle()->authorizer_access_token), $params, Request::METHOD_GET);
+    }
+
+    /**
+     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/code-management/release.html
+     * @return mixed|void
+     */
+    public function wxaRelease()
+    {
+        return Request::getInstance()->send(sprintf(self::WXA_RELEASE, $this->service->getAccessTokenHandle()->authorizer_access_token));
     }
 }

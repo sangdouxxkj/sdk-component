@@ -23,4 +23,7 @@ class ErrCode
 
     // 微信接口返回错误
     const EXCEPTION_CODE_WECHAT = -99;
+
+    // 请求成功
+    const CODE_SUCCESS = 0;
 }
