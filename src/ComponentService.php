@@ -4,6 +4,7 @@ namespace Sangdou\Component;
 
 use Sangdou\Component\component\AuthorizerService;
 use Sangdou\Component\component\CategoryService;
+use Sangdou\Component\component\OpenAccountService;
 use Sangdou\Component\component\TemplateService;
 use Sangdou\Component\component\TicketService;
 use Sangdou\Component\component\TokenService;
@@ -102,6 +103,15 @@ class ComponentService extends AbstractAPI
     public function category(): CategoryService
     {
         return new CategoryService($this->options, $this);
+    }
+
+    /**
+     * @description 开放平台管理
+     * @return OpenAccountService
+     */
+    public function openAccount():OpenAccountService
+    {
+        return new OpenAccountService($this->options, $this);
     }
 
     /**
