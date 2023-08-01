@@ -22,6 +22,10 @@ class TemplateService extends AbstractAPI
 
     public const WXA_RELEASE = 'https://api.weixin.qq.com/wxa/release?access_token=%s';
 
+    public const SUBMIT_AUDIT = 'https://api.weixin.qq.com/wxa/submit_audit?access_token=%s';
+
+    public const REVERT_CODE_RELEASE = 'https://api.weixin.qq.com/wxa/revertcoderelease?access_token=%s';
+
     public function __construct(array $options, ComponentService $service)
     {
         parent::__construct($options);
@@ -121,5 +125,38 @@ class TemplateService extends AbstractAPI
     public function wxaRelease()
     {
         return Request::getInstance()->send(sprintf(self::WXA_RELEASE, $this->service->getAccessTokenHandle()->authorizer_access_token));
+    }
+
+    /**
+     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/code-management/submitAudit.html
+     * @param $itemList
+     * @return mixed|void
+     */
+    public function submitAudit($itemList)
+    {
+        $params = [
+            'item_list' => $itemList['item_list'] ?? [],
+            'feedback_info' => $itemList['feedback_info'] ?? '',
+            'feedback_stuff' => $itemList['feedback_stuff'] ?? '',
+            'preview_info' => $itemList['preview_info'] ?? [],
+            'version_desc' => $itemList['version_desc'] ?? '',
+            'ugc_declare' => $itemList['ugc_declare'] ?? [],
+        ];
+
+        return Request::getInstance()->send(sprintf(self::SUBMIT_AUDIT, $this->service->getAccessTokenHandle()->authorizer_access_token), $params);
+    }
+
+    /**
+     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/code-management/revertCodeRelease.html
+     * @return mixed|void
+     */
+    public function revertCodeRelease($appVersion = '', $action = 'get_history_version')
+    {
+        $params = [
+            'action' => $action,
+            'app_version' => $appVersion,
+        ];
+
+        return Request::getInstance()->send(sprintf(self::REVERT_CODE_RELEASE, $this->service->getAccessTokenHandle()->authorizer_access_token), array_values(array_filter($params)), Request::METHOD_GET);
     }
 }

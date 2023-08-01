@@ -28,7 +28,7 @@ class WxaService extends AbstractAPI
      * @param string $grant_type
      * @return mixed|void
      */
-    public function jcodeToSession(string $js_code, string $grant_type = 'authorization_code')
+    public function jscodeToSession(string $js_code, string $grant_type = 'authorization_code')
     {
         $params = [
             'appid' => $this->service->getAuthorizerAppid(),
