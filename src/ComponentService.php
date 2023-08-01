@@ -46,7 +46,7 @@ class ComponentService extends AbstractAPI
         if (empty($this->getComponentAppid()) && empty($this->getAuthorizerAppid())) {
             throw new \RuntimeException('请求异常1');
         }
-        $this->tokenHandle = new TokenService($this->options);
+        $this->tokenHandle = new TokenService($this->options, $this);
         switch ($this->accessTokenType) {
             case Constants::ACCESS_TOKEN_ACCESS:
                 $this->accessTokenHandle = $this->tokenHandle->getAccessToken();
@@ -102,5 +102,14 @@ class ComponentService extends AbstractAPI
     public function category(): CategoryService
     {
         return new CategoryService($this->options, $this);
+    }
+
+    /**
+     * @description 令牌
+     * @return TokenService
+     */
+    public function token(): TokenService
+    {
+        return new TokenService($this->options, $this);
     }
 }

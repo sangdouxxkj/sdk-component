@@ -19,6 +19,10 @@ abstract class AbstractAPI
     /** @var $accessTokenHandle */
     protected $accessTokenHandle;
 
+    protected $authorizerAccessToken;
+
+    protected $componentAccessToken;
+
     protected $service;
 
     protected function __construct($options)
@@ -113,5 +117,37 @@ abstract class AbstractAPI
     protected function setAuthorizerRefreshToken($authorizerRefreshToken): void
     {
         $this->authorizerRefreshToken = $authorizerRefreshToken;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthorizerAccessToken()
+    {
+        return $this->authorizerAccessToken;
+    }
+
+    /**
+     * @param mixed $authorizerAccessToken
+     */
+    public function setAuthorizerAccessToken($authorizerAccessToken): void
+    {
+        $this->authorizerAccessToken = $authorizerAccessToken;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getComponentAccessToken()
+    {
+        return $this->componentAccessToken;
+    }
+
+    /**
+     * @param mixed $componentAccessToken
+     */
+    public function setComponentAccessToken($componentAccessToken): void
+    {
+        $this->componentAccessToken = $componentAccessToken;
     }
 }

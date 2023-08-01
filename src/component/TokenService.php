@@ -2,6 +2,7 @@
 
 namespace Sangdou\Component\component;
 
+use Sangdou\Component\ComponentService;
 use Sangdou\Component\core\AbstractAPI;
 use Sangdou\Component\core\AccessToken;
 use Sangdou\Component\core\Request;
@@ -19,9 +20,10 @@ class TokenService extends AbstractAPI implements AccessToken
 
     public const API_AUTHORIZER_TOKEN = 'https://api.weixin.qq.com/cgi-bin/component/api_authorizer_token?component_access_token=%s';
 
-    public function __construct($options)
+    public function __construct(array $options, ComponentService $service)
     {
         parent::__construct($options);
+        $this->service = $service;
     }
 
     /**

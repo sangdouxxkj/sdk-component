@@ -45,7 +45,7 @@ class TicketService extends AbstractAPI
         $params = [
             'component_appid' => $this->service->getComponentAppid(),
         ];
-        return Request::getInstance()->send(sprintf(self::API_CREATE_PREAUTHCODE, $this->service->tokenHandle->getComponentToken()->component_access_token), $params);
+        return Request::getInstance()->send(sprintf(self::API_CREATE_PREAUTHCODE, $this->service->getComponentTokenHandle()->component_access_token), $params);
     }
 
     /**
@@ -60,7 +60,7 @@ class TicketService extends AbstractAPI
             'authorization_code' => $authorization_code,
         ];
 
-        return Request::getInstance()->send(sprintf(self::API_QUERY_AUTH, $this->service->tokenHandle->getComponentToken()->component_access_token), $params);
+        return Request::getInstance()->send(sprintf(self::API_QUERY_AUTH, $this->service->getComponentTokenHandle()->component_access_token), $params);
     }
 
     /**
@@ -78,10 +78,10 @@ class TicketService extends AbstractAPI
 
         switch ($type) {
             case 1:
-                $accessToken = $this->service->tokenHandle->getComponentToken()->component_access_token;
+                $accessToken = $this->service->getComponentTokenHandle()->component_access_token;
                 break;
             case 2:
-                $accessToken = $this->service->tokenHandle->getAccessTokenHandle()->authorizer_access_token;
+                $accessToken = $this->service->getAccessTokenHandle()->authorizer_access_token;
                 break;
             default :
                 throw new \Exception('缺失token');

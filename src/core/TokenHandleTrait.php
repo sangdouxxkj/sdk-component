@@ -11,8 +11,12 @@ trait TokenHandleTrait
         if (empty($this->tokenHandle)) {
             throw new \RuntimeException(ErrCode::CODE_COMPONENT_TOKEN_ERR);
         }
-
-        $componentToken = $this->tokenHandle->getComponentToken();
+        if (empty($this->getComponentAccessToken())) {
+            $componentToken = $this->tokenHandle->getComponentToken();
+        } else {
+            $componentToken = new \stdClass();
+            $componentToken->component_access_token = $this->getComponentAccessToken();
+        }
         if (empty($componentToken)) {
             throw new \RuntimeException(ErrCode::CODE_COMPONENT_TOKEN_NOT_FOUND);
         }
@@ -24,8 +28,12 @@ trait TokenHandleTrait
         if (empty($this->tokenHandle)) {
             throw new \RuntimeException(ErrCode::CODE_ACCESS_TOKEN_ERR);
         }
-
-        $accessToken = $this->tokenHandle->getAccessToken();
+        if (empty($this->getAuthorizerAccessToken())) {
+            $accessToken = $this->tokenHandle->getAccessToken();
+        } else {
+            $accessToken = new \stdClass();
+            $accessToken->authorizer_access_token = $this->getAccessTokenHandle();
+        }
         if (empty($accessToken)) {
             throw new \RuntimeException(ErrCode::CODE_ACCESS_TOKEN_NOT_FOUND);
         }
