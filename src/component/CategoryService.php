@@ -17,7 +17,7 @@ class CategoryService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/category-management/getSettingCategories.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/category-management/getSettingCategories.html
      * @return mixed|void
      */
     public function getCategory()

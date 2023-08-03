@@ -23,7 +23,7 @@ class OpenAccountService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/openplatform-management/bindOpenAccount.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/openplatform-management/bindOpenAccount.html
      * @param $open_appid
      * @return mixed|void
      */
@@ -37,7 +37,7 @@ class OpenAccountService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/openplatform-management/unbindOpenAccount.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/openplatform-management/unbindOpenAccount.html
      * @param $open_appid
      * @return mixed|void
      */
@@ -51,7 +51,7 @@ class OpenAccountService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/openplatform-management/getOpenAccount.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/openplatform-management/getOpenAccount.html
      * @param $open_appid
      * @return mixed|void
      */
@@ -61,7 +61,7 @@ class OpenAccountService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/openplatform-management/createOpenAccount.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/openplatform-management/createOpenAccount.html
      * @return mixed|void
      */
     public function createOpenAccount()

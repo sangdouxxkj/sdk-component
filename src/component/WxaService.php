@@ -23,7 +23,7 @@ class WxaService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/login/thirdpartyCode2Session.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/login/thirdpartyCode2Session.html
      * @param string $js_code
      * @param string $grant_type
      * @return mixed|void
@@ -41,7 +41,7 @@ class WxaService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/member-management/bindTester.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/member-management/bindTester.html
      * @param string $wechatid
      * @return mixed|void
      */
@@ -55,7 +55,7 @@ class WxaService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/member-management/unbindTester.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/member-management/unbindTester.html
      * @param string $wechatid
      * @return mixed|void
      */
@@ -69,7 +69,7 @@ class WxaService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/member-management/getTester.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/member-management/getTester.html
      * @param string $action
      * @return mixed|void
      */
@@ -83,7 +83,7 @@ class WxaService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/basic-info-management/getAccountBasicInfo.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/basic-info-management/getAccountBasicInfo.html
      * @return mixed|void
      */
     public function getAccountBasicInfo()

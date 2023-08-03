@@ -33,7 +33,7 @@ class TemplateService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/thirdparty-management/template-management/getTemplatedRaftList.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/thirdparty-management/template-management/getTemplatedRaftList.html
      * @return mixed|void
      */
     public function getTemplateDraftList()
@@ -42,7 +42,7 @@ class TemplateService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/thirdparty-management/template-management/addToTemplate.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/thirdparty-management/template-management/addToTemplate.html
      * @param $draft_id
      * @param int $template_type
      * @return mixed|void
@@ -58,7 +58,7 @@ class TemplateService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/thirdparty-management/template-management/getTemplateList.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/thirdparty-management/template-management/getTemplateList.html
      * @param int $template_type
      * @return mixed|void
      */
@@ -68,7 +68,7 @@ class TemplateService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/thirdparty-management/template-management/deleteTemplate.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/thirdparty-management/template-management/deleteTemplate.html
      * @param int $template_id
      * @return mixed|void
      */
@@ -82,7 +82,7 @@ class TemplateService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/code-management/commit.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/code-management/commit.html
      * @param $template_id
      * @param $ext_json
      * @param $user_version
@@ -102,7 +102,7 @@ class TemplateService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/code-management/getTrialQRCode.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/code-management/getTrialQRCode.html
      * @param string $path
      * @return mixed|void
      */
@@ -119,7 +119,7 @@ class TemplateService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/code-management/release.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/code-management/release.html
      * @return mixed|void
      */
     public function wxaRelease()
@@ -128,7 +128,7 @@ class TemplateService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/code-management/submitAudit.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/code-management/submitAudit.html
      * @param $itemList
      * @return mixed|void
      */
@@ -147,7 +147,7 @@ class TemplateService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/code-management/revertCodeRelease.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/code-management/revertCodeRelease.html
      * @return mixed|void
      */
     public function revertCodeRelease($appVersion = '', $action = 'get_history_version')

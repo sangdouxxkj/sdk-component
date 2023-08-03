@@ -19,7 +19,7 @@ class AuthorizerService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/authorization-management/getAuthorizerInfo.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/authorization-management/getAuthorizerInfo.html
      * @param string $authorizer_appid
      * @return mixed|void
      */
@@ -34,7 +34,7 @@ class AuthorizerService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/authorization-management/setAuthorizerOptionInfo.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/authorization-management/setAuthorizerOptionInfo.html
      * @param $option_name
      * @param $option_value
      * @return mixed|void
@@ -50,7 +50,7 @@ class AuthorizerService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/authorization-management/getAuthorizerOptionInfo.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/authorization-management/getAuthorizerOptionInfo.html
      * @param $option_name
      * @return mixed|void
      */

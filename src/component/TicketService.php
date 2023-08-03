@@ -23,7 +23,7 @@ class TicketService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/ticket-token/startPushTicket.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/ticket-token/startPushTicket.html
      * @return array|false
      */
     public function apiStartPushTicket()
@@ -37,7 +37,7 @@ class TicketService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/ticket-token/getPreAuthCode.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/ticket-token/getPreAuthCode.html
      * @return mixed|void
      */
     public function apiCreatePreauthcode()
@@ -49,7 +49,7 @@ class TicketService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/ThirdParty/token/authorization_info.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api/ThirdParty/token/authorization_info.html
      * @param $authorization_code
      * @return mixed|void
      */
@@ -64,7 +64,7 @@ class TicketService extends AbstractAPI
     }
 
     /**
-     * @see https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/openapi/getApiQuota.html
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/openapi/getApiQuota.html
      * @param $cgi_path
      * @param $type 1 第三方平台;2 小程序; 3 公众号
      * @return mixed|void
