@@ -143,7 +143,7 @@ class TemplateService extends AbstractAPI
             'ugc_declare' => $itemList['ugc_declare'] ?? [],
         ];
 
-        return Request::getInstance()->send(sprintf(self::SUBMIT_AUDIT, $this->service->getAccessTokenHandle()->authorizer_access_token), $params);
+        return Request::getInstance()->send(sprintf(self::SUBMIT_AUDIT, $this->service->getAccessTokenHandle()->authorizer_access_token), $params, Request::METHOD_POST, 15);
     }
 
     /**
