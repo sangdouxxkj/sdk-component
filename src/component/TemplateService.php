@@ -106,15 +106,20 @@ class TemplateService extends AbstractAPI
     /**
      * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/code-management/getTrialQRCode.html
      * @param string $path
+     * @param bool $getUrl
      * @return mixed|void
      */
-    public function getQrcode(string $path = '')
+    public function getQrcode(string $path = '', $getUrl = true)
     {
         $params = [];
         if (!empty($path)) {
             $params = [
                 'path' => $path
             ];
+        }
+
+        if ($getUrl) {
+           return sprintf(self::GET_QRCODE, $this->service->getAccessTokenHandle()->authorizer_access_token);
         }
 
         return Request::getInstance()->send(sprintf(self::GET_QRCODE, $this->service->getAccessTokenHandle()->authorizer_access_token), $params, Request::METHOD_GET);
