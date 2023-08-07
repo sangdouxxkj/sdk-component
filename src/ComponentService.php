@@ -5,6 +5,7 @@ namespace Sangdou\Component;
 use Sangdou\Component\component\AuthorizerService;
 use Sangdou\Component\component\CategoryService;
 use Sangdou\Component\component\OpenAccountService;
+use Sangdou\Component\component\PrivacySettingService;
 use Sangdou\Component\component\TemplateService;
 use Sangdou\Component\component\TicketService;
 use Sangdou\Component\component\TokenService;
@@ -121,5 +122,15 @@ class ComponentService extends AbstractAPI
     public function token(): TokenService
     {
         return new TokenService($this->options, $this);
+    }
+
+
+    /**
+     * @description 隐私
+     * @return PrivacySettingService
+     */
+    public function privacy(): PrivacySettingService
+    {
+        return new PrivacySettingService($this->options, $this);
     }
 }
