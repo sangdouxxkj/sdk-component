@@ -24,6 +24,8 @@ class TemplateService extends AbstractAPI
 
     public const SUBMIT_AUDIT = 'https://api.weixin.qq.com/wxa/submit_audit?access_token=%s';
 
+    public const UNDOCODE_AUDIT = 'https://api.weixin.qq.com/wxa/undocodeaudit?access_token=%s';
+
     public const REVERT_CODE_RELEASE = 'https://api.weixin.qq.com/wxa/revertcoderelease?access_token=%s';
 
     public function __construct(array $options, ComponentService $service)
@@ -158,5 +160,15 @@ class TemplateService extends AbstractAPI
         ];
 
         return Request::getInstance()->send(sprintf(self::REVERT_CODE_RELEASE, $this->service->getAccessTokenHandle()->authorizer_access_token), array_values(array_filter($params)), Request::METHOD_GET);
+    }
+
+    /**
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/code-management/undoAudit.html
+     * @param int $template_type
+     * @return mixed|void
+     */
+    public function unDoCodeAudit()
+    {
+        return Request::getInstance()->send(sprintf(self::UNDOCODE_AUDIT, $this->service->getComponentTokenHandle()->component_access_token), [], Request::METHOD_GET);
     }
 }
