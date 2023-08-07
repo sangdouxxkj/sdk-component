@@ -98,7 +98,7 @@ class TemplateService extends AbstractAPI
             'user_desc' => $user_desc,
         ];
 
-        return Request::getInstance()->send(sprintf(self::WXA_COMMIT, $this->service->getAccessTokenHandle()->authorizer_access_token), $params, Request::METHOD_POST, 10);
+        return Request::getInstance()->send(sprintf(self::WXA_COMMIT, $this->service->getAccessTokenHandle()->authorizer_access_token), $params, Request::METHOD_POST, 15);
     }
 
     /**
