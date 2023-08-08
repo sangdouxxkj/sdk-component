@@ -28,6 +28,8 @@ class TemplateService extends AbstractAPI
 
     public const REVERT_CODE_RELEASE = 'https://api.weixin.qq.com/wxa/revertcoderelease?access_token=%s';
 
+    public const GET_LATEST_AUDITSTATUS = 'https://api.weixin.qq.com/wxa/get_latest_auditstatus?access_token=%s';
+
     public function __construct(array $options, ComponentService $service)
     {
         parent::__construct($options);
@@ -119,7 +121,7 @@ class TemplateService extends AbstractAPI
         }
 
         if ($getUrl) {
-           return sprintf(self::GET_QRCODE, $this->service->getAccessTokenHandle()->authorizer_access_token);
+            return sprintf(self::GET_QRCODE, $this->service->getAccessTokenHandle()->authorizer_access_token);
         }
 
         return Request::getInstance()->send(sprintf(self::GET_QRCODE, $this->service->getAccessTokenHandle()->authorizer_access_token), $params, Request::METHOD_GET);
@@ -164,7 +166,7 @@ class TemplateService extends AbstractAPI
             'app_version' => $appVersion,
         ];
 
-        return Request::getInstance()->send(sprintf(self::REVERT_CODE_RELEASE, $this->service->getAccessTokenHandle()->authorizer_access_token), array_values(array_filter($params)), Request::METHOD_GET);
+        return Request::getInstance()->send(sprintf(self::REVERT_CODE_RELEASE, $this->service->getAccessTokenHandle()->authorizer_access_token), array_filter($params), Request::METHOD_GET);
     }
 
     /**
@@ -175,5 +177,14 @@ class TemplateService extends AbstractAPI
     public function unDoCodeAudit()
     {
         return Request::getInstance()->send(sprintf(self::UNDOCODE_AUDIT, $this->service->getComponentTokenHandle()->component_access_token), [], Request::METHOD_GET);
+    }
+
+    /**
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/code-management/getLatestAuditStatus.html
+     * @return mixed|void
+     */
+    public function getLatestAuditstatus()
+    {
+        return Request::getInstance()->send(sprintf(self::GET_LATEST_AUDITSTATUS, $this->service->getAccessTokenHandle()->authorizer_access_token), [], Request::METHOD_GET);
     }
 }
