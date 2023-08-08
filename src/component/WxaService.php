@@ -16,6 +16,8 @@ class WxaService extends AbstractAPI
 
     public const GET_ACCOUNT_BASIC_INFO = 'https://api.weixin.qq.com/cgi-bin/account/getaccountbasicinfo?access_token=%s';
 
+    public const  API_SUBSCRIBE_SEND = 'https://api.weixin.qq.com/wxa/generatescheme?access_token=%s';
+
     public function __construct(array $options, ComponentService $service)
     {
         parent::__construct($options);
@@ -89,5 +91,19 @@ class WxaService extends AbstractAPI
     public function getAccountBasicInfo()
     {
         return Request::getInstance()->send(sprintf(self::GET_ACCOUNT_BASIC_INFO, $this->service->getAccessTokenHandle()->authorizer_access_token));
+    }
+
+    /**
+     * @link https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/qrcode-link/url-scheme/generateScheme.html
+     * @param array $jump_wxa
+     * @param bool $is_expire
+     * @param int $expire_type
+     * @param int $expire_interval
+     * @return mixed|null
+     */
+    public function getScheme(array $jump_wxa, bool $is_expire = true, int $expire_type = 1, int $expire_interval = 30)
+    {
+        $params = compact('jump_wxa', 'is_expire', 'expire_type', 'expire_interval');
+        return Request::getInstance()->send(sprintf(self::API_SUBSCRIBE_SEND, $this->service->getAccessTokenHandle()->authorizer_access_token), $params);
     }
 }
