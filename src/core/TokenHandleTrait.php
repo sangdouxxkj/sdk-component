@@ -32,7 +32,7 @@ trait TokenHandleTrait
             $accessToken = $this->tokenHandle->getAccessToken();
         } else {
             $accessToken = new \stdClass();
-            $accessToken->authorizer_access_token = $this->getAccessTokenHandle();
+            $accessToken->authorizer_access_token = $this->getAuthorizerAccessToken();
         }
         if (empty($accessToken)) {
             throw new \RuntimeException(ErrCode::CODE_ACCESS_TOKEN_NOT_FOUND);
