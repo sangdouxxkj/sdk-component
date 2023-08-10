@@ -18,6 +18,9 @@ class WxaService extends AbstractAPI
 
     public const  API_SUBSCRIBE_SEND = 'https://api.weixin.qq.com/wxa/generatescheme?access_token=%s';
 
+    public const API_GET_WXACODE_UNLIMIT = 'https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=%s';
+    public const API_CREATE_QRCODE = 'https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token=%s';
+
     public function __construct(array $options, ComponentService $service)
     {
         parent::__construct($options);
@@ -105,5 +108,47 @@ class WxaService extends AbstractAPI
     {
         $params = compact('jump_wxa', 'is_expire', 'expire_type', 'expire_interval');
         return Request::getInstance()->send(sprintf(self::API_SUBSCRIBE_SEND, $this->service->getAccessTokenHandle()->authorizer_access_token), $params);
+    }
+
+    /**
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/authorization-management/getAuthorizerInfo.html
+     * @param $scene
+     * @param $page
+     * @param $width
+     * @param $autoColor
+     * @param $lineColor
+     * @param $isHyaline
+     * @param $envVersion
+     * @return mixed|null
+     */
+    public function appCodeUnlimit($scene = '', $page = '', $width = 280, $autoColor = null, $lineColor = null, $isHyaline = false, $envVersion = 'release')
+    {
+        $params = [
+            'scene' => $scene,
+            'page' => $page,
+            'width' => $width,
+            'auto_color' => $autoColor,
+            'line_color' => $lineColor,
+            'is_hyaline' => $isHyaline,
+            'env_version' => $envVersion,
+        ];
+
+        return Request::getInstance()->send(sprintf(self::API_GET_WXACODE_UNLIMIT, $this->service->getAccessTokenHandle()->authorizer_access_token), $params);
+    }
+
+    /**
+     * @link https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/qrcode-link/qr-code/createQRCode.html
+     * @param $path
+     * @param $width
+     * @return mixed|null
+     */
+    public function createQRCode($path, $width = 430)
+    {
+        $params = [
+            'path' => $path,
+            'width' => $width,
+        ];
+
+        return Request::getInstance()->send(sprintf(self::API_CREATE_QRCODE, $this->service->getAccessTokenHandle()->authorizer_access_token), $params);
     }
 }
