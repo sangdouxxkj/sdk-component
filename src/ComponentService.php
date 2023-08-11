@@ -141,6 +141,6 @@ class ComponentService extends AbstractAPI
      */
     public function wxopen(): WxopenService
     {
-        return new PrivacySettingService($this->options, $this);
+        return new WxopenService($this->options, $this);
     }
 }
