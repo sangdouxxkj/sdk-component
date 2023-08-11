@@ -10,6 +10,7 @@ use Sangdou\Component\component\TemplateService;
 use Sangdou\Component\component\TicketService;
 use Sangdou\Component\component\TokenService;
 use Sangdou\Component\component\WxaService;
+use Sangdou\Component\component\WxopenService;
 use Sangdou\Component\core\AbstractAPI;
 use Sangdou\Component\core\Constants;
 use Sangdou\Component\core\Singleton;
@@ -130,6 +131,15 @@ class ComponentService extends AbstractAPI
      * @return PrivacySettingService
      */
     public function privacy(): PrivacySettingService
+    {
+        return new PrivacySettingService($this->options, $this);
+    }
+
+    /**
+     * @description 普通二维码
+     * @return WxopenService
+     */
+    public function wxopen(): WxopenService
     {
         return new PrivacySettingService($this->options, $this);
     }
