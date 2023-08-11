@@ -52,10 +52,23 @@ class ComponentService extends AbstractAPI
         $this->tokenHandle = new TokenService($this->options, $this);
         switch ($this->accessTokenType) {
             case Constants::ACCESS_TOKEN_ACCESS:
-                $this->accessTokenHandle = $this->tokenHandle->getAccessToken();
+
+                if (!empty($this->authorizerAccessToken)) {
+                    $this->accessTokenHandle = new \stdClass();
+                    $this->accessTokenHandle->authorizer_access_token = $this->authorizerAccessToken;
+                    $this->accessTokenHandle->authorizer_refresh_token = $this->authorizerRefreshToken;
+                } else {
+                    $this->accessTokenHandle = $this->tokenHandle->getAccessToken();
+                }
                 break;
             case Constants::ACCESS_TOKEN_COMPONENT:
-                $this->accessTokenHandle = $this->tokenHandle->getComponentToken();
+
+                if (!empty($this->componentAccessToken)) {
+                    $this->accessTokenHandle = new \stdClass();
+                    $this->component_access_token = $this->componentAccessToken;
+                } else {
+                    $this->accessTokenHandle = $this->tokenHandle->getComponentToken();
+                }
                 break;
             default:
                 throw new \RuntimeException('请求异常2');
@@ -111,7 +124,7 @@ class ComponentService extends AbstractAPI
      * @description 开放平台管理
      * @return OpenAccountService
      */
-    public function openAccount():OpenAccountService
+    public function openAccount(): OpenAccountService
     {
         return new OpenAccountService($this->options, $this);
     }
