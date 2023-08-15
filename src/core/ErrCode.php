@@ -31,6 +31,11 @@ class ErrCode
 
     const TEMPLATE_LIST_IS_FULL = 85065;
 
+    const USER_NOT_EXIST = 85001;
+    const USER_BIND_LIMIT = 85002;
+    const USER_BIND_MANY = 85003;
+    const USER_ALREADY_BIND = 85004;
+
     public static function errMsg($errCode)
     {
         if ($errCode == self::CODE_SUCCESS) {
@@ -41,6 +46,14 @@ class ErrCode
                 return '找不到模板';
             case self::TEMPLATE_LIST_IS_FULL:
                 return '模板库已满';
+            case self::USER_NOT_EXIST:
+                return '微信号不存在或微信号设置为不可搜索';
+            case self::USER_BIND_LIMIT:
+                return '小程序绑定的体验者数量达到上限';
+            case self::USER_BIND_MANY:
+                return '微信号绑定的小程序体验者达到上限';
+            case self::USER_ALREADY_BIND:
+                return '微信号已经绑定';
             default:
                 return '系统繁忙，此时请开发者稍候再试';
         }
