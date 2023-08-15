@@ -133,7 +133,7 @@ class TemplateService extends AbstractAPI
      */
     public function wxaRelease()
     {
-        return Request::getInstance()->send(sprintf(self::WXA_RELEASE, $this->service->getAccessTokenHandle()->authorizer_access_token));
+        return Request::getInstance()->send(sprintf(self::WXA_RELEASE, $this->service->getAccessTokenHandle()->authorizer_access_token), new \stdClass());
     }
 
     /**

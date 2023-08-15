@@ -34,7 +34,7 @@ class Request
         $this->retryTimes = $times;
     }
 
-    public function send($url, array $data = [], $method = self::METHOD_POST, int $timeout = 5)
+    public function send($url, $data = [], $method = self::METHOD_POST, int $timeout = 5)
     {
         if (in_array($url, self::NO_RETRY_URL_MAP)) {
             $this->retryTimes = 1;
@@ -89,11 +89,11 @@ class Request
      *
      * @param $method
      * @param $url
-     * @param array $data
+     * @param $data
      * @param int $timeout
      * @return false
      */
-    private function buildCurl($method, $url, array $data = [], int $timeout = 2)
+    private function buildCurl($method, $url, $data = [], int $timeout = 2)
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
