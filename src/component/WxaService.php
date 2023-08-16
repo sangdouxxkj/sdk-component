@@ -21,6 +21,10 @@ class WxaService extends AbstractAPI
     public const API_GET_WXACODE_UNLIMIT = 'https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=%s';
     public const API_CREATE_QRCODE = 'https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token=%s';
 
+    public const API_MODIFY_DOMAIN = 'https://api.weixin.qq.com/wxa/modify_domain?access_token=%s';
+
+    public const API_SETWEBVIEWDOMAIN = 'https://api.weixin.qq.com/wxa/setwebviewdomain?access_token=%s';
+
     public function __construct(array $options, ComponentService $service)
     {
         parent::__construct($options);
@@ -150,5 +154,44 @@ class WxaService extends AbstractAPI
         ];
 
         return Request::getInstance()->send(sprintf(self::API_CREATE_QRCODE, $this->service->getAccessTokenHandle()->authorizer_access_token), $params);
+    }
+
+    /**
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/domain-management/modifyServerDomain.html
+     * @param $params
+     * @param $action
+     * @return mixed|void
+     */
+    public function modifyDomain($params, $action = 'set')
+    {
+        if ($action !== 'get') {
+            $params = [
+                'requestdomain' => $params['requestdomain'] ?? [],
+                'wsrequestdomain' => $params['wsrequestdomain'] ?? [],
+                'uploaddomain' => $params['uploaddomain'] ?? [],
+                'downloaddomain' => $params['downloaddomain'] ?? [],
+                'udpdomain' => $params['udpdomain'] ?? [],
+                'tcpdomain' => $params['tcpdomain'] ?? [],
+            ];
+        }
+        $params['action'] = $action;
+        return Request::getInstance()->send(sprintf(self::API_MODIFY_DOMAIN, $this->service->getAccessTokenHandle()->authorizer_access_token), array_filter($params));
+    }
+
+    /**
+     * @link https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/domain-management/modifyJumpDomain.html
+     * @param $webviewdomain
+     * @param $action
+     * @return mixed|void
+     */
+    public function setwebviewdomain($webviewdomain, $action = 'set')
+    {
+        if ($action !== 'get') {
+            $params = [
+                'webviewdomain' => $webviewdomain['webviewdomain'] ?? [],
+            ];
+        }
+        $params['action'] = $action;
+        return Request::getInstance()->send(sprintf(self::API_SETWEBVIEWDOMAIN, $this->service->getAccessTokenHandle()->authorizer_access_token), array_filter($params), Request::METHOD_POST, 10);
     }
 }

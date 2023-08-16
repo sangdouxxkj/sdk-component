@@ -50,7 +50,7 @@ class WxopenService extends AbstractAPI
             $params['appid'] = $appid;
         }
 
-        return Request::getInstance()->send(sprintf(self::QRCODE_JUMP_GET, $this->service->getComponentTokenHandle()->component_access_token), $params);
+        return Request::getInstance()->send(sprintf(self::QRCODE_JUMP_GET, $this->service->getAccessTokenHandle()->authorizer_access_token), $params);
     }
 
     /**
@@ -83,7 +83,7 @@ class WxopenService extends AbstractAPI
             $params['appid'] = $appid;
         }
 
-        return Request::getInstance()->send(sprintf(self::QRCODE_JUMP_ADD, $this->service->getComponentTokenHandle()->component_access_token), $params);
+        return Request::getInstance()->send(sprintf(self::QRCODE_JUMP_ADD, $this->service->getAccessTokenHandle()->authorizer_access_token), $params);
     }
 
     /**
@@ -98,7 +98,7 @@ class WxopenService extends AbstractAPI
             'prefix' => $prefix,
         ];
 
-        return Request::getInstance()->send(sprintf(self::QRCODE_JUMP_PUBLISH, $this->service->getComponentTokenHandle()->component_access_token), $params);
+        return Request::getInstance()->send(sprintf(self::QRCODE_JUMP_PUBLISH, $this->service->getAccessTokenHandle()->authorizer_access_token), $params);
     }
 
     /**
@@ -118,7 +118,7 @@ class WxopenService extends AbstractAPI
             $params['appid'] = $appid;
         }
 
-        return Request::getInstance()->send(sprintf(self::QRCODE_JUMP_DELETE, $this->service->getComponentTokenHandle()->component_access_token), $params);
+        return Request::getInstance()->send(sprintf(self::QRCODE_JUMP_DELETE, $this->service->getAccessTokenHandle()->authorizer_access_token), $params);
     }
 
     /**
@@ -128,6 +128,6 @@ class WxopenService extends AbstractAPI
      */
     public function downloadQRCodeText()
     {
-        return Request::getInstance()->send(sprintf(self::QRCODE_JUMP_DOWNLOAD, $this->service->getComponentTokenHandle()->component_access_token));
+        return Request::getInstance()->send(sprintf(self::QRCODE_JUMP_DOWNLOAD, $this->service->getAccessTokenHandle()->authorizer_access_token), new class {});
     }
 }
