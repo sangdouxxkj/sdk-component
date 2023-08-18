@@ -34,17 +34,17 @@ class Request
         $this->retryTimes = $times;
     }
 
-    public function send($url, $data = [], $method = self::METHOD_POST, int $timeout = 5)
+    public function send($url, $data = [], $method = self::METHOD_POST, int $timeout = 5, $output = false)
     {
         if (in_array($url, self::NO_RETRY_URL_MAP)) {
             $this->retryTimes = 1;
         }
-        $result = $this->doAndRetry($method, $url, $data, $timeout, $this->retryTimes);
+        $result = $this->doAndRetry($method, $url, $data, $timeout, $this->retryTimes, $output);
         $this->setHideError();
         return $result;
     }
 
-    private function doAndRetry($method, $url, $data, $timeout, $timesLimit)
+    private function doAndRetry($method, $url, $data, $timeout, $timesLimit, $output)
     {
         for ($times = 1; $times <= $timesLimit; $times++) {
             try {
@@ -56,6 +56,10 @@ class Request
 
                 // 执行请求
                 $response = curl_exec($ch);
+                $error = curl_error($ch);
+                if ($output) {
+                    return $response;
+                }
                 $result = json_decode($response);
                 $error = curl_error($ch);
                 if (!empty($error)) {
@@ -63,7 +67,7 @@ class Request
                 }
 
                 if (!empty(json_last_error())) {
-                    throw new \RuntimeException("返回的不是合法json字符串:" . $response,ErrCode::EXCEPTION_CODE_JSON);
+                    throw new \RuntimeException("返回的不是合法json字符串:" . $response, ErrCode::EXCEPTION_CODE_JSON);
                 }
 
                 if (!$this->isHideError && isset($result->errcode) && $result->errcode != 0) {
@@ -171,7 +175,7 @@ class Request
             }
 
             if (isset($result->errcode) && $result->errcode != 0) {
-                throw new \RuntimeException( "访问微信接口上传文件发生错误:" . ($result->errmsg ?? ""), ErrCode::EXCEPTION_CODE_WECHAT);
+                throw new \RuntimeException("访问微信接口上传文件发生错误:" . ($result->errmsg ?? ""), ErrCode::EXCEPTION_CODE_WECHAT);
             }
 
             curl_close($ch);

@@ -137,7 +137,7 @@ class WxaService extends AbstractAPI
             'env_version' => $envVersion,
         ];
 
-        return Request::getInstance()->send(sprintf(self::API_GET_WXACODE_UNLIMIT, $this->service->getAccessTokenHandle()->authorizer_access_token), $params);
+        return Request::getInstance()->send(sprintf(self::API_GET_WXACODE_UNLIMIT, $this->service->getAccessTokenHandle()->authorizer_access_token), $params, Request::METHOD_POST, 10, true);
     }
 
     /**
