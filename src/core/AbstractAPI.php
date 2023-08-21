@@ -23,6 +23,8 @@ abstract class AbstractAPI
 
     protected $componentAccessToken;
 
+    protected $componentAccessTokenExpiresIn;
+
     protected $service;
 
     protected function __construct($options)
@@ -122,7 +124,7 @@ abstract class AbstractAPI
     /**
      * @return mixed
      */
-    public function getAuthorizerAccessToken()
+    protected function getAuthorizerAccessToken()
     {
         return $this->authorizerAccessToken;
     }
@@ -130,7 +132,7 @@ abstract class AbstractAPI
     /**
      * @param mixed $authorizerAccessToken
      */
-    public function setAuthorizerAccessToken($authorizerAccessToken): void
+    protected function setAuthorizerAccessToken($authorizerAccessToken): void
     {
         $this->authorizerAccessToken = $authorizerAccessToken;
     }
@@ -138,7 +140,7 @@ abstract class AbstractAPI
     /**
      * @return mixed
      */
-    public function getComponentAccessToken()
+    protected function getComponentAccessToken()
     {
         return $this->componentAccessToken;
     }
@@ -146,8 +148,24 @@ abstract class AbstractAPI
     /**
      * @param mixed $componentAccessToken
      */
-    public function setComponentAccessToken($componentAccessToken): void
+    protected function setComponentAccessToken($componentAccessToken): void
     {
         $this->componentAccessToken = $componentAccessToken;
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getComponentAccessTokenExpiresIn()
+    {
+        return $this->componentAccessTokenExpiresIn;
+    }
+
+    /**
+     * @param mixed $componentAccessTokenExpiresIn
+     */
+    protected function setComponentAccessTokenExpiresIn($componentAccessTokenExpiresIn): void
+    {
+        $this->componentAccessTokenExpiresIn = $componentAccessTokenExpiresIn;
     }
 }

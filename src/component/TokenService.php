@@ -33,6 +33,13 @@ class TokenService extends AbstractAPI implements AccessToken
      */
     public function getComponentToken()
     {
+        if (!empty($this->service->componentAccessToken)) {
+            $tempAccessToken = new \stdClass();
+            $tempAccessToken->component_access_token = $this->service->componentAccessToken;
+            $tempAccessToken->expires_in = $this->service->componentAccessTokenExpiresIn;
+            return $tempAccessToken;
+        }
+
         return Request::getInstance()->send(self::API_COMPONENT_TOKEN, [
             'component_appid' => $this->getComponentAppid(),
             'component_appsecret' => $this->getComponentAppsecret(),

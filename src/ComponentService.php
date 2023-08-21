@@ -66,6 +66,8 @@ class ComponentService extends AbstractAPI
                     $this->component_access_token = $this->getComponentAccessToken();
                 } else {
                     $this->accessTokenHandle = $this->tokenHandle->getComponentToken();
+                    $this->setComponentAccessToken($this->accessTokenHandle->component_access_token);
+                    $this->setComponentAccessTokenExpiresIn($this->accessTokenHandle->expires_in);
                 }
                 break;
             default:
