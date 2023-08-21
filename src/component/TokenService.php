@@ -47,7 +47,7 @@ class TokenService extends AbstractAPI implements AccessToken
      */
     public function getAccessToken()
     {
-        return Request::getInstance()->send(sprintf(self::API_AUTHORIZER_TOKEN, $this->getComponentToken()->component_access_token), [
+        return Request::getInstance()->send(sprintf(self::API_AUTHORIZER_TOKEN, $this->getComponentAccessToken() ?? $this->service->accessTokenHandle->component_access_token), [
             'component_appid' => $this->getComponentAppid(),
             'authorizer_appid' => $this->getAuthorizerAppid(),
             'authorizer_refresh_token' => $this->getAuthorizerRefreshToken(),

@@ -52,20 +52,18 @@ class ComponentService extends AbstractAPI
         $this->tokenHandle = new TokenService($this->options, $this);
         switch ($this->accessTokenType) {
             case Constants::ACCESS_TOKEN_ACCESS:
-
-                if (!empty($this->authorizerAccessToken)) {
+                if (!empty($this->getAuthorizerAccessToken())) {
                     $this->accessTokenHandle = new \stdClass();
-                    $this->accessTokenHandle->authorizer_access_token = $this->authorizerAccessToken;
-                    $this->accessTokenHandle->authorizer_refresh_token = $this->authorizerRefreshToken;
+                    $this->accessTokenHandle->authorizer_access_token = $this->getAuthorizerAccessToken();
+                    $this->accessTokenHandle->authorizer_refresh_token = $this->getAuthorizerRefreshToken();
                 } else {
                     $this->accessTokenHandle = $this->tokenHandle->getAccessToken();
                 }
                 break;
             case Constants::ACCESS_TOKEN_COMPONENT:
-
-                if (!empty($this->componentAccessToken)) {
+                if (!empty($this->getComponentAccessToken())) {
                     $this->accessTokenHandle = new \stdClass();
-                    $this->component_access_token = $this->componentAccessToken;
+                    $this->component_access_token = $this->getComponentAccessToken();
                 } else {
                     $this->accessTokenHandle = $this->tokenHandle->getComponentToken();
                 }
