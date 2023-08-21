@@ -64,6 +64,7 @@ class ComponentService extends AbstractAPI
                 if (!empty($this->getComponentAccessToken())) {
                     $this->accessTokenHandle = new \stdClass();
                     $this->accessTokenHandle->component_access_token = $this->getComponentAccessToken();
+                    $this->accessTokenHandle->expires_in = $this->getComponentAccessTokenExpiresIn();
                 } else {
                     $this->accessTokenHandle = $this->tokenHandle->getComponentToken();
                     $this->setComponentAccessToken($this->accessTokenHandle->component_access_token);
