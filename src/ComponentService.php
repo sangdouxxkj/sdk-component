@@ -63,7 +63,7 @@ class ComponentService extends AbstractAPI
             case Constants::ACCESS_TOKEN_COMPONENT:
                 if (!empty($this->getComponentAccessToken())) {
                     $this->accessTokenHandle = new \stdClass();
-                    $this->component_access_token = $this->getComponentAccessToken();
+                    $this->accessTokenHandle->component_access_token = $this->getComponentAccessToken();
                 } else {
                     $this->accessTokenHandle = $this->tokenHandle->getComponentToken();
                     $this->setComponentAccessToken($this->accessTokenHandle->component_access_token);
